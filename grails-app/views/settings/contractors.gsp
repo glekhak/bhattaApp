@@ -22,9 +22,9 @@
 
 <body>
 <div class="container">
-    <h3 class="text-black">Contractors <button class="btn bg-primary" data-toggle="modal" data-target="#addModal">Add Contractors</button></h3>
+    <h3 class="text-black">Contractors </h3>
 
-
+<button class="btn bg-primary" data-toggle="modal" data-target="#addModal">Add Contractors</button>
 <hr>
      <table id="tableList" class="table table-striped table-hover table-responsive">
         <thead>

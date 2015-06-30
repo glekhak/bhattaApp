@@ -17,7 +17,13 @@
 		<link rel="stylesheet" href="${resource(dir: 'css', file: 'jquery.dataTables_themeroller.css')}" type="text/css">
 		<link rel="stylesheet" href="${resource(dir: 'css', file: 'custom1.css')}" type="text/css">
         <g:javascript src="jquery-1.8.3.js"/>
-        <g:javascript src="jquery-ui-1.8.24.custom.js"/>
+        <g:javascript src="nepaliToAdConverter.js"/>
+    <script src="${resource(dir: 'js', file: 'ad-to-bs-date-table.js')}" type="text/javascript"></script>
+    <script src="${resource(dir: 'js', file: 'NepaliMonthDays.js')}" type="text/javascript"></script>
+    <script src="${resource(dir: 'js', file: 'AdToNepli.js')}" type="text/javascript"></script>
+    <script src="${resource(dir: 'js', file: 'dayOfMonth.js')}" type="text/javascript"></script>
+
+    <g:javascript src="jquery-ui-1.8.24.custom.js"/>
         <g:javascript src="bootstrap-modal.js"/>
         <g:javascript src="bootstrap-popover.js"/>
 
@@ -42,6 +48,12 @@
 
 
         </script>
+    <style>
+
+    .ndp-corner-all{
+        z-index:1051 !important;
+    }
+    </style>
 
 		<g:layoutHead/>
 
@@ -86,7 +98,7 @@
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" onclick="navLogic(2)">Work Process<span class="caret"></span></a>
                         <ul class="dropdown-menu" role="menu" id="wor" class="navElements">
                             <li><g:link controller="workProcess" action="issueAccessories">Issue Accessories</g:link></li>
-                            <li><a href="#">Process</a></li>
+                            <li><g:link controller="workProcess" action="process">Process</g:link></li>
                         </ul>
                     </li>
                 </ul>

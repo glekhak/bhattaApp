@@ -15,7 +15,9 @@
         $(document).ready(function() {
 
             $('#tableList').dataTable();
-            $('.date').nepaliDatePicker();
+            $('#date').nepaliDatePicker();
+            $('#date1').nepaliDatePicker();
+            $('#start').nepaliDatePicker();
 
         });
 
@@ -25,15 +27,45 @@
              $('#end').removeAttr('disabled')
         }
 
+
+        function nepaliToAd()
+        {
+
+            var s = $('#start').val()
+
+            var start = s.split('-')
+
+            $('#npYearStart').val(start[0])
+            $('#npMonthStart').val(start[1])
+            $('#npDayStart').val(start[2])
+
+
+
+
+               jsNepaliToAdCovert($('#npYearStart'), $('#npMonthStart'), $('#npDayStart'), $('#startDate_year'), $('#startDate_month'), $('#startDate_day'));
+            /*    jsNepaliToAdCovert($('#nToYear'), $('#nToMonth'), $('#nToDay'), $('#endDate_year'), $('#endDate_month'), $('#endDate_day'));*/
+
+
+
+
+        }
+
     </script>
 </head>
 
 <body>
 <div class="container">
-    <h3 class="text-black">Fiscal Year</h3> <a href="#" onclick="showAddModal()" class="btn bg-primary">Add Fiscal Year</a><hr>
+    <h3 class="text-black">Fiscal Year</h3>
+    <button class="btn bg-primary" data-toggle="modal" data-target="#addModal">Add Fiscal Year</button>
+    <hr>
+<input type="text" id="npYearStart">
+<input type="text" id="npMonthStart">
+<input type="text" id="npDayStart">
+<input type="text" id="startDate_year">
+<input type="text" id="startDate_month">
+<input type="text" id="startDate_day">
 
-
-
+<br>
 
     <table id="tableList" class="table table-striped table-hover table-responsive">
         <thead>
@@ -52,10 +84,10 @@
             </td>
 
             <td>
-               <input type="text" value="2072-04-01" disabled id="start" readonly class="form-control date" size="1" >
+               <input type="text" value="2072-04-01" disabled id="start" class="form-control date" readonly onchange="nepaliToAd()" size="1">
             </td>
             <td>
-               <input type="text" value="2073-03-31" disabled id="end" readonly class="form-control date" size="1" >
+               <input type="text" value="2073-03-31" disabled id="end" readonly class="form-control date" size="1">
             </td>
             <td>
                 Active
@@ -87,7 +119,7 @@
                     <div class="form-group">
                         <label for="name" class="col-lg-3 control-label">Name</label>
                         <div class="col-lg-8">
-                            <input type="text" name = 'fiscalName' required class="form-control" id="name" placeholder="Fisca Year Name" >
+                            <input type="text" name = 'fiscalName' required class="form-control" id="name" placeholder="Fiscal Year Name" >
                         </div>
                     </div>
                     <div class="form-group">
@@ -101,6 +133,14 @@
                         <label for="to" class="col-lg-3 control-label">To</label>
                         <div class="col-lg-8">
                             <input type="text" name="to" required class="form-control date" id="to" placeholder="Fiscal Year End">
+
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="to" class="col-lg-3 control-label">Status</label>
+                        <div class="col-lg-8">
+                            <input type="radio" class="form-control" name='status' value="${Boolean.TRUE}">Yes
+                            <input type="radio" class="form-control" name='status' value="${Boolean.FALSE}">No
 
                         </div>
                     </div>
@@ -121,31 +161,48 @@
                 <h4 class="modal-title">Add Fiscal Year</h4>
             </div>
             <br>
-            <g:form class="form-horizontal" controller="settings" action="addFiscalYear">
+            <g:form class="form-horizontal" controller="settings" action="saveFiscalYear">
 
 
                 <div class="form-group">
                     <label for="name" class="col-lg-3 control-label">Name</label>
                     <div class="col-lg-8">
-                        <input type="text" name = 'fiscalName' required class="form-control" placeholder="Fisca Year Name" >
+                        <input type="text" name = 'name' required class="form-control" placeholder="Fiscal Year Name" >
                     </div>
                 </div>
                 <div class="form-group">
                     <label for="from" class="col-lg-3 control-label">From</label>
                     <div class="col-lg-8">
-                        <input type="text" name="from" required class="form-control date" placeholder="New Password">
+                        <input type="text" name="from" id="date" required class="form-control date" placeholder="Fiscal Year Start"  onchange="nepaliToAd()">
 
                     </div>
                 </div>
                 <div class="form-group">
                     <label for="to" class="col-lg-3 control-label">To</label>
                     <div class="col-lg-8">
-                        <input type="text" name="to" required class="form-control date"  placeholder="Fiscal Year End">
+                        <input type="text" name="to" required id="date1" class="form-control date"  placeholder="Fiscal Year End">
 
                     </div>
                 </div>
+                <div class="form-group">
+                    <label class="col-lg-3 control-label">Status</label>
+                    <div class="col-lg-8">
+                        <div class="radio">
+                            <label>
+                                <input type="radio" name="status" value="${Boolean.TRUE}" checked="checked">
+                                Active
+                            </label>
+                        </div>
+                        <div class="radio">
+                            <label>
+                                <input type="radio" name="status" value="${Boolean.FALSE}">
+                                Inactive
+                            </label>
+                        </div>
+                    </div>
+                </div>
                 <div class="modal-footer">
-                    <button type="submit" class="btn btn-success">Save Changes</button>
+                    <button type="submit" class="btn btn-success">Save</button>
                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
 
                 </div>
